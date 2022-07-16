@@ -1,27 +1,44 @@
 {
    "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-   "extends": ["github>renovatebot/.github"],
-   "peerDependencies": {
-      "versionStrategy": "widen"
-   },
+   "extends": [
+      "github>renovatebot/.github"
+   ],
    "packageRules": [
       {
-         "packagePatterns": "^(@angular|typescript)",
-         "groupName": ["angular packages"],
-         "excludedPackageNames": "foo"
-      }
-   ],
-   "devDependencies": {
-      "automerge": "minor",
-      "schedule": null
-   },
-   "depTypes": [
-      "dependencies",
+         "matchPackagePatterns": "^(@angular|typescript)",
+         "groupName": "angular packages",
+         "excludePackageNames": "foo"
+      },
       {
-         "depType": "optionalDependencies",
+         "matchDepTypes": [
+            "peerDependencies"
+         ],
+         "rangeStrategy": "widen"
+      },
+      {
+         "matchDepTypes": [
+            "devDependencies"
+         ],
+         "minor": {
+            "automerge": true
+         },
+         "major": {
+            "automerge": false
+         },
+         "schedule": null
+      },
+      {
          "respectLatest": false,
-         "automerge": "minor",
-         "schedule": "before 5am on Mondays"
+         "minor": {
+            "automerge": true
+         },
+         "major": {
+            "automerge": false
+         },
+         "schedule": "before 5am on Monday",
+         "matchDepTypes": [
+            "optionalDependencies"
+         ]
       }
    ]
 }
